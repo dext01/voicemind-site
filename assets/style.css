@@ -71,6 +71,7 @@ p { margin: 0 0 12px; }
 .btn-ghost:hover { border-color: var(--gold-dark); color: var(--text); }
 @media (max-width: 420px) { .btn { width: 100%; } }
 .note { font-size: 14px; color: var(--muted); margin-top: 14px; }
+.cta .note { margin-bottom: 0; }
 
 /* ── Hero ───────────────────────────────── */
 .hero { padding: 72px 0 64px; position: relative; overflow: hidden; }

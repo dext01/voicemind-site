@@ -198,8 +198,8 @@
         <h2>Попробуйте <em>VoiceMind</em></h2>
         <p class="lead">Скачайте APK и установите поверх любой прошлой версии — записи сохранятся. Новости и свежие сборки — в Telegram-канале.</p>
         <div class="btns">
-          <!-- TODO: заменить href на прямую ссылку на APK (например, https://github.com/FedorSolodkin/VoiceMind/releases/latest/download/VoiceMind.apk) -->
-          <a class="btn btn-gold" href="#TODO-APK-LINK" data-todo="apk-link">
+          <!-- Ссылка на страницу последнего релиза; скрипт внизу подменяет её на прямую ссылку на .apk -->
+          <a class="btn btn-gold" id="apk-link" href="https://github.com/FedorSolodkin/VoiceMind/releases/latest">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
             Скачать APK
           </a>
@@ -208,6 +208,7 @@
             @IVoiceMind
           </a>
         </div>
+        <p class="note" id="apk-version" hidden></p>
         <ul class="reqs">
           <li>Android 8.0 и новее</li>
           <li>~600 МБ свободного места</li>
@@ -226,5 +227,25 @@
     <span><a href="https://github.com/FedorSolodkin/VoiceMind" target="_blank" rel="noopener">GitHub</a> · <a href="https://t.me/IVoiceMind" target="_blank" rel="noopener">Telegram</a></span>
   </div>
 </footer>
+<script>
+  // Подставляет прямую ссылку на .apk из последнего релиза GitHub.
+  // Если API недоступен, кнопка ведёт на страницу релиза (href в разметке).
+  // Репозиторий должен быть публичным, иначе посетители получат 404.
+  var APK_REPO = "FedorSolodkin/VoiceMind";
+  document.getElementById("apk-link").href = "https://github.com/" + APK_REPO + "/releases/latest";
+  fetch("https://api.github.com/repos/" + APK_REPO + "/releases/latest")
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (rel) {
+      var apks = (rel.assets || []).filter(function (a) { return /\.apk$/i.test(a.name); });
+      var apk = apks.filter(function (a) { return !/debug/i.test(a.name); })[0] || apks[0];
+      if (!apk) return;
+      document.getElementById("apk-link").href = apk.browser_download_url;
+      var v = document.getElementById("apk-version");
+      var mb = Math.round(apk.size / 1048576);
+      v.textContent = "Версия " + rel.tag_name + (mb ? " · " + mb + " МБ" : "");
+      v.hidden = false;
+    })
+    .catch(function () {});
+</script>
 </body>
 </html>
