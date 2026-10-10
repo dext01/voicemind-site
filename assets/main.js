@@ -148,6 +148,107 @@
     upd();
   }
 
+  // ── Заголовок: «Голос» появляется по буквам ──────────────────
+  const firstLine = document.querySelector(".display .line");
+  if (firstLine && !reduce) {
+    const node = firstLine.firstChild;           // текстовый узел «Голос »
+    if (node && node.nodeType === 3) {
+      const frag = document.createDocumentFragment();
+      [...node.textContent].forEach((c, i) => {
+        if (c === " ") { frag.appendChild(document.createTextNode(" ")); return; }
+        const sp = document.createElement("span");
+        sp.className = "ch"; sp.textContent = c; sp.style.animationDelay = `${0.15 + i * 0.06}s`;
+        frag.appendChild(sp);
+      });
+      firstLine.replaceChild(frag, node);
+    }
+  }
+
+  // ── Прогресс прокрутки, линия шагов ──────────────────────────
+  const bar = document.getElementById("progress");
+  const howLine = document.getElementById("howLine");
+  const howSteps = document.querySelector(".how__steps");
+  const onProgress = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    if (bar) bar.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+    if (howLine && howSteps) {
+      const r = howSteps.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, (window.innerHeight * 0.5 - r.top) / r.height));
+      howLine.style.transform = `scaleY(${p})`;
+    }
+  };
+  window.addEventListener("scroll", onProgress, { passive: true });
+  onProgress();
+
+  // ── Манифест: слова загораются при прокрутке ─────────────────
+  const man = document.getElementById("manifest");
+  if (man) {
+    const keys = ["текст,", "кто", "задачи.", "телефоне,"];
+    const words = man.textContent.split(/\s+/).filter(Boolean);
+    man.textContent = "";
+    const spans = words.map((w) => {
+      const sp = document.createElement("span");
+      sp.className = "w" + (keys.includes(w) ? " key" : "");
+      sp.textContent = w;
+      man.appendChild(sp); man.appendChild(document.createTextNode(" "));
+      return sp;
+    });
+    const light = () => {
+      const r = man.getBoundingClientRect();
+      const p = (window.innerHeight * 0.85 - r.top) / (r.height + window.innerHeight * 0.35);
+      const n = reduce ? spans.length : Math.round(Math.min(1, Math.max(0, p)) * spans.length);
+      spans.forEach((sp, i) => sp.classList.toggle("lit", i < n));
+    };
+    window.addEventListener("scroll", light, { passive: true });
+    light();
+  }
+
+  // ── Бегущая строка ускоряется от прокрутки и меняет направление ──
+  const track = document.querySelector(".marquee__track");
+  if (track && !reduce) {
+    track.style.animation = "none";
+    let x = 0, dir = -1, lastY = window.scrollY, boost = 0;
+    window.addEventListener("scroll", () => {
+      const dy = window.scrollY - lastY; lastY = window.scrollY;
+      if (dy !== 0) dir = dy > 0 ? -1 : 1;
+      boost = Math.min(30, boost + Math.abs(dy) * 0.25);
+    }, { passive: true });
+    const half = () => track.scrollWidth / 2;
+    const run = () => {
+      boost *= 0.92;
+      x += dir * (0.6 + boost);
+      const h = half();
+      if (x <= -h) x += h; if (x > 0) x -= h;
+      track.style.transform = `translate3d(${x}px,0,0)`;
+      requestAnimationFrame(run);
+    };
+    requestAnimationFrame(run);
+  }
+
+  // ── Световое пятно и магнитные кнопки ────────────────────────
+  const spot = document.getElementById("spot");
+  if (spot && fine && !reduce) {
+    let sx = innerWidth / 2, sy = innerHeight / 2, px = sx, py = sy;
+    window.addEventListener("mousemove", (e) => { sx = e.clientX; sy = e.clientY; spot.classList.add("on"); }, { passive: true });
+    document.addEventListener("mouseleave", () => spot.classList.remove("on"));
+    const loop = () => {
+      px += (sx - px) * 0.12; py += (sy - py) * 0.12;
+      spot.style.transform = `translate3d(${px}px, ${py}px, 0)`;
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+  }
+  if (fine && !reduce) {
+    document.querySelectorAll(".btn, .status").forEach((el) => {
+      el.addEventListener("mousemove", (e) => {
+        const r = el.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+        el.style.transform = `translate(${dx * 0.25}px, ${dy * 0.35}px)`;
+      });
+      el.addEventListener("mouseleave", () => { el.style.transform = ""; });
+    });
+  }
+
   // ── Список: фото за курсором ─────────────────────────────────
   const float = document.getElementById("floatImg");
   if (float && fine && !reduce) {

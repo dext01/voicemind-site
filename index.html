@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://voice-mind.ru/">
   <meta property="og:title" content="VoiceMind — голос → структура">
   <meta property="og:description" content="Расшифровка, голоса и итоги разговора — на телефоне, без облака. Закрытый пилот.">
-  <meta property="og:image" content="https://voice-mind.ru/assets/og.jpg?v=3">
+  <meta property="og:image" content="https://voice-mind.ru/assets/og.jpg?v=4">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
@@ -21,13 +21,15 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preload" href="/assets/fonts/CormorantGaramond-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/fonts.css?v=3">
-  <link rel="stylesheet" href="/assets/style.css?v=3">
-  <script src="/assets/main.js?v=3" defer></script>
+  <link rel="stylesheet" href="/assets/fonts.css?v=4">
+  <link rel="stylesheet" href="/assets/style.css?v=4">
+  <script src="/assets/main.js?v=4" defer></script>
 </head>
 <body>
 
 <div class="grain" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><i id="progress"></i></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
 
 <header class="top" id="top">
   <div class="wrap top__row">
@@ -69,7 +71,7 @@
       <div class="stage reveal" aria-hidden="true">
         <div class="phone" id="phone">
           <div class="phone__glare"></div>
-          <div class="phone__notch"></div>
+          <div class="phone__cam"></div>
           <div class="screen" data-screen="0">
 
             <!-- Экран 1: запись -->
@@ -95,9 +97,8 @@
             <!-- Экран 3: итоги -->
             <div class="scr scr--sum">
               <div class="scr__top"><span>Итоги</span><span>✦</span></div>
-              <p class="sum__h">Решения</p>
-              <div class="chk on">Подписать договор до конца месяца</div>
               <p class="sum__h">Задачи</p>
+              <div class="chk on">Подписать договор до конца месяца</div>
               <div class="chk">Отправить договор — до среды</div>
               <div class="chk">Проверка у юристов — четверг</div>
               <div class="chk blur">Счёт на первый платёж</div>
@@ -118,21 +119,29 @@
   <!-- ── Бегущая строка ──────────────────────────────────────── -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee__track">
-      <span>Расшифровка</span><i>✦</i><span>Голоса</span><i>✦</i><span>Итоги</span><i>✦</i><span>Вопросы к записи</span><i>✦</i><span>Без интернета</span><i>✦</i><span>Без облака</span><i>✦</i>
-      <span>Расшифровка</span><i>✦</i><span>Голоса</span><i>✦</i><span>Итоги</span><i>✦</i><span>Вопросы к записи</span><i>✦</i><span>Без интернета</span><i>✦</i><span>Без облака</span><i>✦</i>
+      <span>Расшифровка</span><i>✦</i><span>Голоса</span><i>✦</i><span>Итоги</span><i>✦</i><span>Вопросы к записи</span><i>✦</i><span>На телефоне</span><i>✦</i><span>Без облака</span><i>✦</i>
+      <span>Расшифровка</span><i>✦</i><span>Голоса</span><i>✦</i><span>Итоги</span><i>✦</i><span>Вопросы к записи</span><i>✦</i><span>На телефоне</span><i>✦</i><span>Без облака</span><i>✦</i>
     </div>
   </div>
+
+  <!-- ── Манифест: слова загораются при прокрутке ─────────────── -->
+  <section class="manifest" aria-label="Коротко о VoiceMind">
+    <div class="wrap">
+      <p class="manifest__text" id="manifest">Вы&nbsp;говорите. VoiceMind записывает разговор, превращает речь в&nbsp;текст, отмечает, кто что сказал, и&nbsp;выписывает задачи. Всё&nbsp;это — на&nbsp;телефоне, без&nbsp;облака.</p>
+    </div>
+  </section>
 
   <!-- ── 01 Как устроено ─────────────────────────────────────── -->
   <section class="how" id="how">
     <div class="wrap how__grid">
       <div class="how__steps">
+        <div class="how__line" aria-hidden="true"><i id="howLine"></i></div>
         <div class="section__head reveal"><p class="num">01</p><h2 class="title">Как устроено</h2></div>
 
         <article class="step" data-step="0">
           <p class="num">01.1</p>
           <h3>Запись или файл</h3>
-          <p>Нажали «Запись» — текст появляется по&nbsp;ходу разговора. Можно открыть и&nbsp;готовое аудио: голосовое из&nbsp;мессенджера, запись диктофона.</p>
+          <p>Нажали «Запись» — текст набирается по&nbsp;ходу разговора, кусками примерно раз в&nbsp;минуту. Можно открыть и&nbsp;готовое аудио: голосовое из&nbsp;мессенджера, запись диктофона.</p>
         </article>
         <article class="step" data-step="1">
           <p class="num">01.2</p>
@@ -142,7 +151,7 @@
         <article class="step" data-step="2">
           <p class="num">01.3</p>
           <h3>Итоги</h3>
-          <p>Задачи, решения и&nbsp;договорённости собираются отдельным списком. Запись можно спросить: «о&nbsp;чём договорились?»</p>
+          <p>Задачи и&nbsp;договорённости собираются отдельным списком. Запись можно спросить: «о&nbsp;чём договорились?»</p>
         </article>
       </div>
 
@@ -177,24 +186,24 @@
     <div class="photo__shade"></div>
     <div class="wrap photo__text">
       <p class="eyebrow reveal">Совещания · встречи · интервью</p>
-      <p class="photo__big reveal">Разговор заканчивается — <em>текст уже готов.</em></p>
+      <p class="photo__big reveal">Текст набирается, <em>пока идёт разговор.</em></p>
     </div>
   </section>
 
   <!-- ── 02 Где считается ───────────────────────────────────── -->
   <section class="device" id="device">
     <div class="wrap device__grid">
-      <figure class="device__img reveal">
+      <figure class="device__img reveal clip">
         <img src="/assets/img/mic-dark.webp" alt="" loading="lazy" width="900" height="1350">
         <div class="device__badge"><span class="pulse-dot"></span>Офлайн</div>
       </figure>
       <div class="device__text">
         <div class="section__head reveal"><p class="num">02</p><h2 class="title">Где считается</h2></div>
         <p class="device__big reveal">На телефоне. <em class="shine">Целиком.</em></p>
-        <p class="device__lead reveal">Распознавание речи и&nbsp;анализ текста работают на&nbsp;самом устройстве. Аудио и&nbsp;текст никуда не&nbsp;отправляются — приложение работает и&nbsp;в&nbsp;режиме полёта.</p>
+        <p class="device__lead reveal">Распознавание речи и&nbsp;анализ текста работают на&nbsp;самом устройстве, без интернета — в&nbsp;том числе в&nbsp;режиме полёта. Аудио и&nbsp;текст записей никуда не&nbsp;отправляются.</p>
         <dl class="specs">
           <div class="reveal"><dt>Записи</dt><dd>хранятся только на телефоне</dd></div>
-          <div class="reveal"><dt>Защита</dt><dd>отдельную запись можно закрыть отпечатком</dd></div>
+          <div class="reveal"><dt>Защита</dt><dd>отдельную запись можно закрыть отпечатком или PIN-кодом</dd></div>
           <div class="reveal"><dt>Резервная копия</dt><dd>файлом, по паролю</dd></div>
           <div class="reveal"><dt>Языки</dt><dd>русский и английский</dd></div>
         </dl>
@@ -207,10 +216,10 @@
     <div class="wrap">
       <div class="section__head reveal"><p class="num">03</p><h2 class="title">Для разговоров</h2></div>
       <ul class="index">
-        <li class="reveal" data-img="/assets/img/meeting-s.webp"><span class="index__n">01</span><span class="index__name">Совещания</span><span class="index__note">протокол, решения, задачи</span></li>
+        <li class="reveal" data-img="/assets/img/meeting-s.webp"><span class="index__n">01</span><span class="index__name">Совещания</span><span class="index__note">текст по голосам, задачи</span></li>
         <li class="reveal" data-img="/assets/img/table-s.webp"><span class="index__n">02</span><span class="index__name">Встречи с&nbsp;клиентами</span><span class="index__note">договорённости</span></li>
         <li class="reveal" data-img="/assets/img/mic-studio-s.webp"><span class="index__n">03</span><span class="index__name">Интервью</span><span class="index__note">текст по собеседникам</span></li>
-        <li class="reveal" data-img="/assets/img/lecture-s.webp"><span class="index__n">04</span><span class="index__name">Лекции</span><span class="index__note">конспект</span></li>
+        <li class="reveal" data-img="/assets/img/lecture-s.webp"><span class="index__n">04</span><span class="index__name">Лекции</span><span class="index__note">текст лекции, вопросы к нему</span></li>
         <li class="reveal" data-img="/assets/img/workshop-s.webp"><span class="index__n">05</span><span class="index__name">Заметки себе</span><span class="index__note">список дел</span></li>
       </ul>
     </div>
@@ -223,7 +232,7 @@
     <div class="wrap pilot__inner">
       <p class="num reveal">04 · Сейчас</p>
       <p class="pilot__big reveal">Закрытый <em class="shine">пилот.</em></p>
-      <p class="pilot__lead reveal">VoiceMind проверяется на&nbsp;настоящих разговорах вместе с&nbsp;небольшим числом команд. Публичной версии пока нет. Если вам интересно поучаствовать — напишите.</p>
+      <p class="pilot__lead reveal">VoiceMind сейчас на&nbsp;закрытом тестировании. Публичной версии пока нет. Если хотите попробовать его в&nbsp;своей команде — напишите.</p>
       <a class="btn btn--big reveal" href="https://t.me/ssenkov"><span>Telegram&nbsp;·&nbsp;@ssenkov</span></a>
     </div>
   </section>

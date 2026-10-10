@@ -124,7 +124,8 @@ ul { padding: 0; list-style: none; }
   transform: rotateY(-14deg) rotateX(6deg); transform-style: preserve-3d;
   transition: transform .6s var(--ease); will-change: transform;
 }
-.phone__notch { position: absolute; top: 22px; left: 50%; width: 92px; height: 26px; margin-left: -46px; background: #000; border-radius: 20px; z-index: 3; }
+.phone__cam { position: absolute; top: 24px; left: 50%; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; z-index: 3;
+  background: radial-gradient(circle at 35% 35%, #2B3A4A 0 25%, #050505 45%); box-shadow: 0 0 0 2px #0A0907; }
 .phone__glare { position: absolute; inset: 0; border-radius: 48px; z-index: 4; pointer-events: none; background: linear-gradient(115deg, rgba(255, 255, 255, .14) 0%, transparent 28%, transparent 70%, rgba(255, 255, 255, .05) 100%); }
 .screen { position: relative; width: 100%; height: 100%; border-radius: 38px; overflow: hidden; background: radial-gradient(130% 70% at 50% 0%, #2A2418 0%, #12100C 55%); }
 .scr { position: absolute; inset: 0 0 64px; padding: 58px 20px 0; opacity: 0; visibility: hidden; transform: translateY(18px) scale(.98);
@@ -319,4 +320,50 @@ ul { padding: 0; list-style: none; }
   .float-img { display: none; }
   .foot__mid { display: none; }
   .scroll-hint { display: none; }
+}
+
+
+/* ── Прогресс прокрутки ──────────────────────────────────── */
+.progress { position: fixed; inset: 0 0 auto; height: 2px; z-index: 60; pointer-events: none; }
+.progress i { display: block; height: 100%; width: 100%; transform-origin: 0 50%; transform: scaleX(0);
+  background: linear-gradient(90deg, var(--amber), var(--gold), var(--gold-2)); box-shadow: 0 0 12px rgba(240, 192, 64, .7); }
+
+/* ── Световое пятно за курсором ──────────────────────────── */
+.spot { position: fixed; left: 0; top: 0; width: 560px; height: 560px; margin: -280px 0 0 -280px; z-index: 1; pointer-events: none;
+  border-radius: 50%; background: radial-gradient(circle, rgba(240, 192, 64, .09), transparent 60%); mix-blend-mode: screen;
+  opacity: 0; transition: opacity .6s; will-change: transform; }
+.spot.on { opacity: 1; }
+
+/* ── Заголовок по буквам ─────────────────────────────────── */
+.display .ch { display: inline-block; opacity: 0; transform: translateY(.45em) rotate(6deg); filter: blur(8px);
+  animation: chIn 1s var(--ease) forwards; }
+.display .shine { display: inline-block; animation: shine 6s linear infinite, lineIn 1.3s var(--ease) .55s both; }
+@keyframes lineIn { from { opacity: 0; transform: translateY(.35em); filter: blur(10px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes chIn { to { opacity: 1; transform: none; filter: none; } }
+
+/* ── Манифест ────────────────────────────────────────────── */
+.manifest { padding: clamp(100px, 14vw, 200px) 0; }
+.manifest__text { font-family: var(--serif); font-size: clamp(34px, 5.2vw, 78px); line-height: 1.12; letter-spacing: -.01em; max-width: 18em; }
+.manifest__text .w { color: rgba(244, 239, 227, .16); transition: color .5s ease, text-shadow .5s ease; }
+.manifest__text .w.lit { color: var(--ink); }
+.manifest__text .w.key.lit { color: var(--gold-2); font-style: italic; text-shadow: 0 0 30px rgba(240, 192, 64, .35); }
+
+/* ── Линия прогресса шагов ───────────────────────────────── */
+.how__steps { position: relative; padding-left: 0; }
+.how__line { position: absolute; left: -28px; top: 140px; bottom: 0; width: 1px; background: var(--rule); }
+.how__line i { position: absolute; inset: 0; transform-origin: 0 0; transform: scaleY(0); background: linear-gradient(var(--gold-2), var(--amber)); box-shadow: 0 0 10px rgba(240, 192, 64, .6); }
+
+/* ── Шторка для фото ─────────────────────────────────────── */
+.clip { clip-path: inset(12% 12% 12% 12% round 28px); transition: clip-path 1.4s var(--ease), opacity 1s var(--ease), transform 1s var(--ease) !important; }
+.clip.in { clip-path: inset(0 0 0 0 round 28px); }
+
+/* ── Магнитные кнопки ────────────────────────────────────── */
+.btn, .status { will-change: transform; }
+
+@media (max-width: 980px) { .how__line { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .display .ch, .display .shine { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .manifest__text .w { color: var(--ink) !important; }
+  .clip { clip-path: none !important; }
+  .spot, .progress { display: none; }
 }
