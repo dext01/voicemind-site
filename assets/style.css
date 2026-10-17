@@ -367,3 +367,61 @@ ul { padding: 0; list-style: none; }
   .clip { clip-path: none !important; }
   .spot, .progress { display: none; }
 }
+
+/* ── Ссылка-стрелка, простая секция (404 и служебные страницы) ── */
+.link { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(240, 192, 64, .35); transition: border-color .25s, color .25s; }
+.link:hover { color: var(--gold-2); border-bottom-color: var(--gold-2); }
+.section { padding: clamp(120px, 14vw, 180px) 0 clamp(64px, 8vw, 110px); border-bottom: 1px solid var(--rule); }
+.statement__big { font-family: var(--serif); font-size: clamp(44px, 7vw, 96px); line-height: .95; letter-spacing: -.02em; }
+.statement__big em { color: var(--gold); }
+
+/* ── 04 Скачать ────────────────────────────────────────────── */
+.download { padding: clamp(90px, 11vw, 150px) 0; border-top: 1px solid var(--rule); }
+.dl__app { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(28px, 5vw, 80px); align-items: end; padding-bottom: clamp(48px, 6vw, 80px); border-bottom: 1px solid var(--rule); }
+.dl__big { font-family: var(--serif); font-size: clamp(40px, 5.4vw, 76px); line-height: .98; letter-spacing: -.015em; margin-bottom: 24px; }
+.dl__big em { color: var(--gold); }
+.dl__lead { font-size: 17px; color: var(--ink-2); max-width: 36em; }
+.dl__lead + .dl__lead { margin-top: 14px; }
+.dl__lead b { color: var(--ink); font-weight: 500; }
+.dl__cta { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.dl__meta { font-size: 12px; color: var(--muted); word-break: break-all; max-width: 34em; }
+.btn.is-off { filter: saturate(.55); }
+.dl__models { padding-top: clamp(40px, 5vw, 64px); }
+.dl__h { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 3.4vw, 44px); margin-bottom: 14px; }
+.models { margin-top: 32px; border-top: 1px solid var(--rule); }
+.models__row { display: grid; grid-template-columns: 1.1fr 1.6fr 110px; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--rule); font-size: 15px; transition: background .3s, padding .3s; }
+.models__row:not(.models__row--head):hover { background: linear-gradient(90deg, rgba(240, 192, 64, .06), transparent); padding-left: 12px; }
+.models__row--head { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding: 12px 0; }
+.models__row b { font-weight: 500; }
+.models__row small { display: block; margin-top: 4px; font-size: 12px; color: var(--muted); }
+.models__row a { color: var(--gold); text-decoration: none; word-break: break-all; }
+.models__row a:hover { text-decoration: underline; }
+.models .sha { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; word-break: break-all; }
+.models__row > span:last-child { text-align: right; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.dl__note { margin-top: 22px; font-size: 13px; color: var(--muted); }
+
+@media (max-width: 980px) {
+  .dl__app { grid-template-columns: 1fr; align-items: start; }
+}
+@media (max-width: 720px) {
+  .models__row { grid-template-columns: 1fr auto; gap: 6px 16px; }
+  .models__row > span:nth-child(2) { grid-column: 1 / -1; grid-row: 2; }
+  .models__row--head > span:nth-child(2) { display: none; }
+}
+
+/* ── Текстовые страницы: инструкция, конфиденциальность ── */
+.doc { padding: clamp(120px, 14vw, 170px) 0 clamp(70px, 9vw, 120px); }
+.doc__body { max-width: 46em; }
+.doc__body h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(44px, 6vw, 80px); line-height: .98; letter-spacing: -.015em; margin: 16px 0 28px; }
+.doc__body h1 em { color: var(--gold); }
+.doc__body h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3vw, 38px); margin: 48px 0 14px; padding-top: 22px; border-top: 1px solid var(--rule); }
+.doc__body p, .doc__body li { font-size: 17px; color: var(--ink-2); }
+.doc__body p + p { margin-top: 14px; }
+.doc__body ol, .doc__body ul { padding-left: 1.3em; margin: 12px 0; }
+.doc__body ul { list-style: disc; }
+.doc__body li { margin: 8px 0; }
+.doc__body li::marker { color: var(--gold); }
+.doc__body b { color: var(--ink); font-weight: 500; }
+.doc__body .lead { font-size: 19px; color: var(--ink); }
+.doc__body .note { margin-top: 28px; font-size: 14px; color: var(--muted); }
+@media (max-width: 420px) { .status__x { display: none; } }
