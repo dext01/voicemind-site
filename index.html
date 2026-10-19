@@ -22,7 +22,7 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preload" href="/assets/fonts/CormorantGaramond-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/fonts.css?v=4">
-  <link rel="stylesheet" href="/assets/style.css?v=5">
+  <link rel="stylesheet" href="/assets/style.css?v=6">
   <script src="/assets/main.js?v=4" defer></script>
 </head>
 <body>
@@ -137,20 +137,17 @@
     <div class="wrap how__grid">
       <div class="how__steps">
         <div class="how__line" aria-hidden="true"><i id="howLine"></i></div>
-        <div class="section__head reveal"><p class="num">01</p><h2 class="title">Как устроено</h2></div>
+        <div class="section__head reveal"><h2 class="title">Как устроено</h2></div>
 
         <article class="step" data-step="0">
-          <p class="num">01.1</p>
           <h3>Запись или файл</h3>
           <p>Нажали «Запись» — текст набирается по&nbsp;ходу разговора, кусками примерно раз в&nbsp;минуту. Можно открыть и&nbsp;готовое аудио: голосовое из&nbsp;мессенджера, запись диктофона.</p>
         </article>
         <article class="step" data-step="1">
-          <p class="num">01.2</p>
           <h3>Текст по голосам</h3>
           <p>Разговор делится по&nbsp;собеседникам, им&nbsp;можно дать имена. Нажатие на&nbsp;слово включает запись с&nbsp;этого места.</p>
         </article>
         <article class="step" data-step="2">
-          <p class="num">01.3</p>
           <h3>Итоги</h3>
           <p>Задачи и&nbsp;договорённости собираются отдельным списком. Запись можно спросить: «о&nbsp;чём договорились?»</p>
         </article>
@@ -199,7 +196,7 @@
         <div class="device__badge"><span class="pulse-dot"></span>Офлайн</div>
       </figure>
       <div class="device__text">
-        <div class="section__head reveal"><p class="num">02</p><h2 class="title">Где считается</h2></div>
+        <div class="section__head reveal"><h2 class="title">Где считается</h2></div>
         <p class="device__big reveal">На телефоне. <em class="shine">Целиком.</em></p>
         <p class="device__lead reveal">Распознавание речи и&nbsp;анализ текста работают на&nbsp;самом устройстве, без интернета — в&nbsp;том числе в&nbsp;режиме полёта. Аудио и&nbsp;текст записей никуда не&nbsp;отправляются.</p>
         <dl class="specs">
@@ -215,13 +212,13 @@
   <!-- ── 03 Для чего ─────────────────────────────────────────── -->
   <section class="kinds" id="kinds">
     <div class="wrap">
-      <div class="section__head reveal"><p class="num">03</p><h2 class="title">Для разговоров</h2></div>
+      <div class="section__head reveal"><h2 class="title">Для разговоров</h2></div>
       <ul class="index">
-        <li class="reveal" data-img="/assets/img/meeting-s.webp"><span class="index__n">01</span><span class="index__name">Совещания</span><span class="index__note">текст по голосам, задачи</span></li>
-        <li class="reveal" data-img="/assets/img/table-s.webp"><span class="index__n">02</span><span class="index__name">Встречи с&nbsp;клиентами</span><span class="index__note">договорённости</span></li>
-        <li class="reveal" data-img="/assets/img/mic-studio-s.webp"><span class="index__n">03</span><span class="index__name">Интервью</span><span class="index__note">текст по собеседникам</span></li>
-        <li class="reveal" data-img="/assets/img/lecture-s.webp"><span class="index__n">04</span><span class="index__name">Лекции</span><span class="index__note">текст лекции, вопросы к нему</span></li>
-        <li class="reveal" data-img="/assets/img/workshop-s.webp"><span class="index__n">05</span><span class="index__name">Заметки себе</span><span class="index__note">список дел</span></li>
+        <li class="reveal" data-img="/assets/img/meeting-s.webp"><span class="index__name">Совещания</span><span class="index__note">текст по голосам, задачи</span></li>
+        <li class="reveal" data-img="/assets/img/table-s.webp"><span class="index__name">Встречи с&nbsp;клиентами</span><span class="index__note">договорённости</span></li>
+        <li class="reveal" data-img="/assets/img/mic-studio-s.webp"><span class="index__name">Интервью</span><span class="index__note">текст по собеседникам</span></li>
+        <li class="reveal" data-img="/assets/img/lecture-s.webp"><span class="index__name">Лекции</span><span class="index__note">текст лекции, вопросы к нему</span></li>
+        <li class="reveal" data-img="/assets/img/workshop-s.webp"><span class="index__name">Заметки себе</span><span class="index__note">список дел</span></li>
       </ul>
     </div>
     <div class="float-img" id="floatImg" aria-hidden="true"><img alt=""></div>
@@ -230,7 +227,7 @@
   <!-- ── 04 Скачать ──────────────────────────────────────────── -->
   <section class="download" id="download">
     <div class="wrap">
-      <div class="section__head reveal"><p class="num">04</p><h2 class="title">Скачать</h2></div>
+      <div class="section__head reveal"><h2 class="title">Скачать</h2></div>
 
       <div class="dl__app reveal">
         <div>
@@ -241,7 +238,7 @@
         <div class="dl__cta">
           <!-- href, версию и сумму подставляет скрипт внизу страницы из /download/latest.json
                (его пишет scripts/build-pilot.sh в репозитории приложения). -->
-          <a class="btn btn--big is-off" id="apkBtn" href="https://t.me/ssenkov"><span id="apkLabel">APK скоро&nbsp;— напишите в&nbsp;Telegram</span></a>
+          <a class="btn btn--big is-off" id="apkBtn" href="https://t.me/IVoiceMind"><span id="apkLabel">APK скоро&nbsp;— следите в&nbsp;Telegram</span></a>
           <p class="dl__meta" id="apkMeta">Сборка готовится.</p>
         </div>
       </div>
@@ -291,10 +288,10 @@
   <section class="pilot" id="pilot">
     <div class="pilot__glow" aria-hidden="true"></div>
     <div class="wrap pilot__inner">
-      <p class="num reveal">05 · Сейчас</p>
+      <p class="num reveal">Сейчас</p>
       <p class="pilot__big reveal">Идёт <em class="shine">пилот.</em></p>
-      <p class="pilot__lead reveal">Пилотную версию можно скачать выше. Хотите попробовать VoiceMind в&nbsp;своей команде, нашли ошибку или есть идея — напишите.</p>
-      <a class="btn btn--big reveal" href="https://t.me/ssenkov"><span>Telegram&nbsp;·&nbsp;@ssenkov</span></a>
+      <p class="pilot__lead reveal">Пилотную версию можно скачать выше. Новости, обновления и&nbsp;связь с&nbsp;нами — в&nbsp;Telegram-канале проекта.</p>
+      <a class="btn btn--big reveal" href="https://t.me/IVoiceMind"><span>Telegram&nbsp;·&nbsp;@IVoiceMind</span></a>
     </div>
   </section>
 

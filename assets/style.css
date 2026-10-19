@@ -241,10 +241,9 @@ ul { padding: 0; list-style: none; }
 
 /* ── 03 Для чего ──────────────────────────────────────────── */
 .kinds { position: relative; padding: clamp(90px, 11vw, 160px) 0; background: linear-gradient(180deg, var(--bg), #15120D 50%, var(--bg)); }
-.index li { position: relative; display: grid; grid-template-columns: 60px 1fr auto; align-items: baseline; gap: 20px; padding: clamp(16px, 2vw, 26px) 0; border-bottom: 1px solid var(--rule); cursor: default; }
+.index li { position: relative; display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 20px; padding: clamp(16px, 2vw, 26px) 0; border-bottom: 1px solid var(--rule); cursor: default; }
 .index li::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(240, 192, 64, .1), transparent 70%); opacity: 0; transition: opacity .4s; }
 .index li:hover::before { opacity: 1; }
-.index__n { font-size: 12px; letter-spacing: .12em; color: var(--muted); }
 .index__name { font-family: var(--serif); font-size: clamp(38px, 6vw, 88px); line-height: 1; letter-spacing: -.01em; transition: transform .5s var(--ease), color .4s; }
 .index li:hover .index__name { transform: translateX(18px); color: var(--gold-2); font-style: italic; }
 .index__note { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-align: right; }
@@ -315,7 +314,6 @@ ul { padding: 0; list-style: none; }
   .chip--2 { right: -4px; }
   .specs div { grid-template-columns: 1fr; gap: 4px; }
   .index li { grid-template-columns: 1fr; gap: 6px; }
-  .index__n { display: none; }
   .index__note { text-align: left; }
   .float-img { display: none; }
   .foot__mid { display: none; }
